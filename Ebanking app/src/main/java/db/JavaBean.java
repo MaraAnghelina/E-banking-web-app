@@ -73,6 +73,21 @@ public class JavaBean {
 		}
 	} // disconnect()
 	
+	public ResultSet findUser(String user, String pass) throws SQLException, Exception{
+		ResultSet rs = null;
+		try {
+			String queryString = ("select iduser from `ebanking`.`user` where Email='" + user + "' and Parola='" + pass + "';");
+			Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
+			rs = stmt.executeQuery(queryString);
+		}catch (SQLException sqle) {
+			error = "SQLException: Interogarea nu a fost posibila.";
+			throw new SQLException(error);
+		} catch (Exception e) {
+			error = "A aparut o exceptie in timp ce se extrageau datele.";
+			throw new Exception(error);
+		}
+		return rs;
+	}
 	
 	public ResultSet vedeAdvocates() throws SQLException, Exception {
 		ResultSet rs = null;
