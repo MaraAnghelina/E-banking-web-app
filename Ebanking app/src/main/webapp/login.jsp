@@ -66,22 +66,18 @@
 	ResultSet rs = jb.findUser(user, pass);
 	if(rs.next()){
 		int x = rs.getInt("iduser");
-		out.println("<div class=\"overlay\">");
 		out.println("<script type=\"text/javascript\">");
  	    //out.println("alert('Succesfully loged in');");
  	    out.println("location='homepage.jsp';"); // Redirect to another JSP
  	    out.println("</script>");
- 	    out.println("</div>");
 	}
 	else{
-		out.println("<div class=\"alert-box\">");
 		out.println("<script type=\"text/javascript\">");
  	    //out.println("alert('Invalid username or password');");
  	    /* out.println("var loginErrorMsg = document.getElementById(\"login-error-msg\");");
  	    out.println("loginErrorMsg.style.opacity = 1;");*/
  	    out.println("location='index2.html';"); // Redirect to another JSP
  	    out.println("</script>");
- 	    out.println("</div>");
 	}
 	 
  	rs.close();
