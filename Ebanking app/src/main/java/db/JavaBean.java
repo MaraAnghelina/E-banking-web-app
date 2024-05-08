@@ -152,14 +152,14 @@ public class JavaBean {
 		return rs;
 	}
 	
-	public void adaugaAdvocate(String Nume, String Prenume, String Type, String fee)
+	public void addUser(String user, String pass)
 			throws SQLException, Exception {
 		if (con != null) {
 			try {
 				// create a prepared SQL statement
 				Statement stmt;
 				stmt = con.createStatement();
-				stmt.executeUpdate("insert into advocates(name, surname, type, fee) values('" + Nume + "'  , '" + Prenume + "', '" + Type + "', '" + fee + "');");
+				stmt.executeUpdate("insert into user(Email, Parola) values('" + user + "'  , '" + pass + "');");
 
 			} catch (SQLException sqle) {
 				error = "ExceptieSQL: Reactualizare nereusita; este posibil sa existe duplicate.";
@@ -170,14 +170,14 @@ public class JavaBean {
 			throw new Exception(error);
 		}
 	}
-	public void adaugaClient(String Nume, String Prenume, String record, String cnp)
+	public void addCont(String name, String surname, String cont, String currency, int iduser)
 			throws SQLException, Exception {
 		if (con != null) {
 			try {
 				// create a prepared SQL statement
 				Statement stmt;
 				stmt = con.createStatement();
-				stmt.executeUpdate("insert into clients(name, surname, criminal_record, cnp) values('" + Nume + "'  , '" + Prenume + "', '" + record + "', '" + cnp + "');");
+				stmt.executeUpdate("insert into conturi(Nume, Prenume, NrCont, Valuta, iduser) values('" + name + "'  , '" + surname + "', '" + cont + "', '" + currency + "', '" + iduser + "');");
 
 			} catch (SQLException sqle) {
 				error = "ExceptieSQL: Reactualizare nereusita; este posibil sa existe duplicate.";
@@ -188,14 +188,14 @@ public class JavaBean {
 			throw new Exception(error);
 		}
 	}
-	public void adaugaFolder(String Nume, String period, String state, int idclient, int idadvocate)
+	public void addTransactions(String type, double sum, String date, String currency)
 			throws SQLException, Exception {
 		if (con != null) {
 			try {
 				// create a prepared SQL statement
 				Statement stmt;
 				stmt = con.createStatement();
-				stmt.executeUpdate("insert into folder(name, period, state, idadvocate, idclient) values('" + Nume + "'  , '" + period + "', '" + state + "', '" + idadvocate + "', '" + idclient + "');");
+				stmt.executeUpdate("insert into tranzactii(TipTranzactie, Suma, Data, Valuta) values('" + type + "' , '" + sum + "', '" + date + "', '" + currency + "');");
 
 			} catch (SQLException sqle) {
 				error = "ExceptieSQL: Reactualizare nereusita; este posibil sa existe duplicate.";
