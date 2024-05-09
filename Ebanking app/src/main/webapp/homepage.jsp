@@ -105,14 +105,17 @@
         }
     </style>
 </head>
+<jsp:useBean id="jb" scope="session" class="db.JavaBean" />
+<jsp:setProperty name="jb" property="*" />
 <body>
     
-    
-    
+   
+  
+   
     
     
     <div class="container">
-        <h2 style="color: #eee;">Welcome to M&A !</h2>
+        <h2 style="color: #eee;">Welcome to M&A <%= request.getParameter("username") %>!</h2>
         
         <div class="balance">
             Your Account Balance: $1000 
