@@ -68,21 +68,28 @@
 		String pass = request.getParameter("password");
 		String confirmPass = request.getParameter("confirm-password");
 		
-		if(name != null && surname != null && username != null && cont != null && pass != null && confirmPass != null ){
-			jb.connect();
-			jb.addUser(username, pass);
-			ResultSet rs = jb.findUser(username, pass); 
-			rs.next();
-			int iduser = rs.getInt("iduser");
-			jb.addCont(name, surname, cont, currency, iduser);
-			rs.close();
-			jb.disconnect();
-			
+		if(pass != null && confirmPass != null && confirmPass != pass){
 			out.println("<script type=\"text/javascript\">");
-	 	    out.println("alert('Succesfully created an account');");
-	 	    out.println("location='index.html';"); // Redirect to another JSP
+	 	    out.println("alert('The passwords do not match');");
+	 	    out.println("location='register.jsp';"); // Redirect to another JSP
 	 	    out.println("</script>");
-		} else {
+		}else{
+		
+			if(name != null && surname != null && username != null && cont != null && pass != null && confirmPass != null ){
+				jb.connect();
+				jb.addUser(username, pass);
+				ResultSet rs = jb.findUser(username, pass); 
+				rs.next();
+				int iduser = rs.getInt("iduser");
+				jb.addCont(name, surname, cont, currency, iduser);
+				rs.close();
+				jb.disconnect();
+				
+				out.println("<script type=\"text/javascript\">");
+		 	    out.println("alert('Succesfully created an account');");
+		 	    out.println("location='index.html';"); // Redirect to another JSP
+		 	    out.println("</script>");
+			} else {
 	%>
 
     <div class="container">
@@ -114,6 +121,7 @@
     </div>
     
     <%
+			}
 		}
     %>
     
