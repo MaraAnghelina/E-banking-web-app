@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js'></script>
+    <title>Google Maps Example</title>
+    <style>
+        /* Specify the size of the map container */
+        #map {
+            height: 400px; /* Adjust the height as needed */
+            width: 100%; /* Full width */
+        }
+    </style>
+</head>
+<body>
+    <!-- Map container -->
+    <div id="map"></div>
+
+    <script>
+        // Initialize and display the map
+            // Specify the center coordinates of the map
+            const key='oFj0uisoNxQPnbXnI1Kp';
+			const map = new maplibregl.Map({
+			    container: 'map', // container id
+			    style: `https://api.maptiler.com/maps/streets/style.json?key=${key}`, // style URL
+			    center: [26.100,44.43], // starting position [lng, lat]
+			    zoom: 12 // starting zoom
+			});
+			
+			map.doubleClickZoom.disable();
+
+
+            // Define some places with their coordinates
+            /*var places = [
+                { position: { lat: 40.7128, lng: -74.0060 }, name: 'New York City' },
+                { position: { lat: 34.0522, lng: -118.2437 }, name: 'Los Angeles' },
+                { position: { lat: 51.5074, lng: -0.1278 }, name: 'London' }
+            ];
+
+            // Add markers for each place
+            places.forEach(function(place) {
+                var marker = new google.maps.Marker({
+                    position: place.position,
+                    map: map,
+                    title: place.name
+                });
+            });*/
+        
+    </script>
+
+    <!-- Include the Google Maps API script with your API key -->
+    
+</body>
+</html>

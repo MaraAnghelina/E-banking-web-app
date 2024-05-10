@@ -51,6 +51,16 @@
         label {
             color: #eee; /* Light font color for labels */
         }
+        .error-icon {
+            position: absolute;
+            top: 81%;
+            right: 480px;
+            transform: translateY(-50%);
+            color: #ff3333; /* Red color for the error icon */
+            cursor: pointer;
+            display: none; /* Initially hide the error icon */
+            font-size: 24px;
+        }
     </style>
 </head>
 
@@ -114,7 +124,8 @@
             <input type="password" id="password" name="password" placeholder="Choose a password" required><br>
 
             <label for="confirm-password">Confirm Password</label><br>
-            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required onkeyup="checkPasswordMatch()">
+            <span class="error-icon" id="password-match-error">&#10006;</span> <!-- Error icon -->
 
             <input type="submit" value="Register">
         </form>
@@ -124,6 +135,20 @@
 			}
 		}
     %>
+    
+    <script>
+        function checkPasswordMatch() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm-password").value;
+            var errorIcon = document.getElementById("password-match-error");
+
+            if (password !== confirmPassword) {
+                errorIcon.style.display = "inline-block"; // Display the error icon
+            } else {
+                errorIcon.style.display = "none"; // Hide the error icon if passwords match
+            }
+        }
+    </script>
     
 </body>
 </html>
