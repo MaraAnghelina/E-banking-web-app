@@ -58,17 +58,21 @@
  <body>
  
  <%
+ 
+ 	
+ 	
 	jb.connect();
  
  	String user = request.getParameter("username");
  	String pass = request.getParameter("password");
- 
 	ResultSet rs = jb.findUser(user, pass);
+	
 	if(rs.next()){
+		String username = request.getParameter("username");
 		int x = rs.getInt("iduser");
 		out.println("<script type=\"text/javascript\">");
  	    //out.println("alert('Succesfully loged in');");
- 	    out.println("location='homepage.jsp';"); // Redirect to another JSP
+ 	    out.println("location='homepage.jsp?username=" + username + "';"); // Redirect to another JSP
  	    out.println("</script>");
 	}
 	else{
@@ -79,7 +83,7 @@
  	    out.println("location='index2.html';"); // Redirect to another JSP
  	    out.println("</script>");
 	}
-	 
+	
  	rs.close();
 	jb.disconnect();
 %>

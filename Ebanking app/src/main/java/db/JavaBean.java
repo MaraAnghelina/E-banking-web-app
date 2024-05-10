@@ -275,6 +275,29 @@ public class JavaBean {
 		return rs;
 	}
 	
-	
+	public String findUserNameById(int userId) throws SQLException, Exception {
+	    String userName = null;
+	    ResultSet rs = null;
+	    try {
+	        String queryString = "SELECT nume FROM `ebanking`.`user` WHERE iduser=userId";
+	        PreparedStatement pstmt = con.prepareStatement(queryString);
+	        pstmt.setInt(1, userId);
+	        rs = pstmt.executeQuery();
+	        if (rs.next()) {
+	            userName = rs.getString("nume");
+	        }
+	    } catch (SQLException sqle) {
+	        error = "SQLException: Interogarea nu a fost posibila.";
+	        throw new SQLException(error);
+	    } catch (Exception e) {
+	        error = "A aparut o exceptie in timp ce se extrageau datele.";
+	        throw new Exception(error);
+	    } finally {
+	        if (rs != null) {
+	            rs.close();
+	        }
+	    }
+	    return userName;
+	}
 
 }
