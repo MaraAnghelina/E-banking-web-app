@@ -136,7 +136,7 @@
 		}
     %>
     
-<<<<<<< HEAD
+
     <script>
         function checkPasswordMatch() {
             var password = document.getElementById("password").value;
@@ -150,9 +150,7 @@
             }
         }
     </script>
-=======
-    
->>>>>>> 137cf06e8a7be04c6c58d177dbe919cb3d2fa500
+
     
 </body>
 </html>

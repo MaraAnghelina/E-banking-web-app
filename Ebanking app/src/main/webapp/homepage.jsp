@@ -111,10 +111,9 @@
     
    
   
-   
-    
     
     <div class="container">
+    	 
         <h2 style="color: #eee;">Welcome to M&A <%= request.getParameter("username") %>!</h2>
         
         <div class="balance">
@@ -148,9 +147,11 @@
             window.location.href = "help.jsp";
         }
 
-        function redirectToSettingsPage() {
-            window.location.href = "settings.jsp";
+       
+        function redirectToSettingsPage(username) {
+            window.location.href = "settings.jsp?username=" + <%= request.getParameter("username") %>;
         }
+    
     </script>
     
 </body>

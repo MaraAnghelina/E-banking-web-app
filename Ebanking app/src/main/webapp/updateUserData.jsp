@@ -1,70 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page language="java" import="java.lang.*,java.math.*,db.*,java.sql.*, java.io.*, java.util.*"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<jsp:useBean id="jb" scope="session" class="db.JavaBean" />
-<jsp:setProperty name="jb" property="*" />
-
-<%
-    String username = (String) session.getAttribute("username"); 
-
-    
-    if (request.getParameter("submit") != null) {
-        try {
-            jb.connect();
-            String newPassword = request.getParameter("newPassword");
-
-            
-%>
-
-<html>
-<head>
-    <title>Update Successful</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #2b2b2b;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        
-        h1, p, a {
-            color: #eee;
-            text-align: center;
-        }
-
-        a {
-            text-decoration: none;
-            color: #4682B4;
-        }
-    </style>
-</head>
-<body>
-    <h1>Update Successful</h1>
-    <p>Your password has been updated successfully.</p>
-    <p><a href="homepage.jsp">Back to Homepage</a></p>
-</body>
-</html>
-<%
-            jb.disconnect();
-        } catch (Exception e) {
-           
-            out.println("Error: " + e.getMessage());
-        }
-    }
-%>
-
-
-
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>Update User Data</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -94,7 +33,8 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            width: 70%; 
+            width: 50%;
+            max-width: 400px; 
         }
 
         label {
@@ -129,19 +69,29 @@
         input[type="submit"]:hover {
             background-color: #4682B4; 
         }
+
+        .message {
+            color: #eee;
+            text-align: center;
+            font-size: 16px;
+            margin-top: 20px; 
+        }
     </style>
 </head>
 
 <body>
     <div class="content">
-        <h2>Enter new password </h2> 
         <div class="container">
+            <h2>Update User Data</h2>
             <form action="updateUserData.jsp" method="post">
                 <label for="newPassword">New Password:</label>
                 <input type="password" id="newPassword" name="newPassword" required><br><br>
                 <input type="submit" name="submit" value="Update">
             </form>
         </div>
+       
+        <p class="message">Your password has been updated successfully.</p>
+        <p><a href="homepage.jsp">Back to Homepage</a></p>
     </div>
 </body>
 </html>

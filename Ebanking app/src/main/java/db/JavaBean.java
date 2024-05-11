@@ -14,7 +14,7 @@ public class JavaBean {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spital?user=root&password=ValentinPupezescu2021;");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");			
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "");			
 
 			// daca sunt probleme la conectare se poate incerca conexiunea in forma urmatoare:
             // con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test3?useSSL=false?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "ValentinPupezescu2021;");
@@ -299,5 +299,5 @@ public class JavaBean {
 	    }
 	    return userName;
 	}
-
+	
 }
