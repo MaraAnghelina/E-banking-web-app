@@ -59,13 +59,17 @@
  
  <%
  
+ 	String error;
+	Connection con;
  	
- 	
-	jb.connect();
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");			
  
  	String user = request.getParameter("username");
  	String pass = request.getParameter("password");
-	ResultSet rs = jb.findUser(user, pass);
+ 	String queryString = ("select iduser from `ebanking`.`user` where Email='" + user + "' and Parola='" + pass + "';");
+	Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
+	ResultSet rs = stmt.executeQuery(queryString);
 	
 	if(rs.next()){
 		String username = request.getParameter("username");

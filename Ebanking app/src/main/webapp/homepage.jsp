@@ -122,7 +122,7 @@
 
         <div class="button-container">
             <input type="submit" value="View Transactions">
-            <input type="submit" value="Withdraw Funds">
+            <input type="submit" value="Withdraw Funds" onclick="redirectToWithdrawPage()">
             <input type="submit" value="Deposit Funds">
             <input type="submit" value="Transfer Money">
             <input type="submit" value="Loans">
@@ -151,7 +151,13 @@
         function redirectToSettingsPage(username) {
             window.location.href = "settings.jsp?username=" + <%= request.getParameter("username") %>;
         }
+<<<<<<< HEAD
     
+=======
+        function redirectToWithdrawPage(){
+        	window.location.href = "map.html";
+        }
+>>>>>>> f0e284c4e14f39ba6efe8336e708d77ff3e53088
     </script>
     
 </body>
