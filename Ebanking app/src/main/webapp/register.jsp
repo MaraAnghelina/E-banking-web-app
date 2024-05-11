@@ -53,8 +53,8 @@
         }
         .error-icon {
             position: absolute;
-            top: 81%;
-            right: 480px;
+            top: 74.5%;
+            right: 590px;
             transform: translateY(-50%);
             color: #ff3333; /* Red color for the error icon */
             cursor: pointer;
@@ -70,6 +70,12 @@
 <body>
 
 	<%
+		String error;
+		Connection con;
+	 	
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false&allowPublicKeyRetrieval=true", "root", "Trompisor*2002*");
+		
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		String username = request.getParameter("username");
@@ -78,12 +84,12 @@
 		String pass = request.getParameter("password");
 		String confirmPass = request.getParameter("confirm-password");
 		
-		if(pass != null && confirmPass != null && confirmPass != pass){
+		/*if(confirmPass != pass){
 			out.println("<script type=\"text/javascript\">");
 	 	    out.println("alert('The passwords do not match');");
 	 	    out.println("location='register.jsp';"); // Redirect to another JSP
 	 	    out.println("</script>");
-		}else{
+		}else{*/
 		
 			if(name != null && surname != null && username != null && cont != null && pass != null && confirmPass != null ){
 				jb.connect();
@@ -133,10 +139,9 @@
     
     <%
 			}
-		}
+		//}
     %>
     
-<<<<<<< HEAD
     <script>
         function checkPasswordMatch() {
             var password = document.getElementById("password").value;
@@ -150,9 +155,6 @@
             }
         }
     </script>
-=======
-    
->>>>>>> 137cf06e8a7be04c6c58d177dbe919cb3d2fa500
     
 </body>
 </html>
