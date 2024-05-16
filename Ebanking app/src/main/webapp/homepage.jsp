@@ -19,6 +19,7 @@
             height: 100vh;
         }
         
+        
         .container {
             background-color: #353535; 
             padding: 20px; 
@@ -125,7 +126,7 @@
             <input type="submit" value="Withdraw Funds" onclick="redirectToWithdrawPage()">
             <input type="submit" value="Deposit Funds">
             <input type="submit" value="Transfer Money">
-            <input type="submit" value="Loans">
+            <input type="submit" value="Loans" onclick="redirectToLoansPage()">
         </div>
         
     </div>
@@ -149,15 +150,19 @@
 
        
         function redirectToSettingsPage(username) {
-            window.location.href = "settings.jsp?username=" + <%= request.getParameter("username") %>;
+            window.location.href = "settings.jsp";
         }
-<<<<<<< HEAD
+
     
-=======
+
         function redirectToWithdrawPage(){
         	window.location.href = "map.html";
         }
->>>>>>> f0e284c4e14f39ba6efe8336e708d77ff3e53088
+        
+        function redirectToLoansPage() {
+            window.location.href = "loans.jsp";
+        }
+
     </script>
     
 </body>

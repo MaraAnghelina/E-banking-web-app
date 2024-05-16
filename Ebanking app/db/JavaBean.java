@@ -1,6 +1,11 @@
 package db;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class JavaBean {
 
@@ -14,7 +19,7 @@ public class JavaBean {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spital?user=root&password=ValentinPupezescu2021;");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "");			
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");
 
 			// daca sunt probleme la conectare se poate incerca conexiunea in forma urmatoare:
             // con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test3?useSSL=false?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "ValentinPupezescu2021;");
@@ -33,7 +38,7 @@ public class JavaBean {
 	public void connect(String bd) throws ClassNotFoundException, SQLException, Exception {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + bd, "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + bd, "root", "Berberita@10");
 		} catch (ClassNotFoundException cnfe) {
 			error = "ClassNotFoundException: Nu s-a gasit driverul bazei de date.";
 			throw new ClassNotFoundException(error);
@@ -49,7 +54,7 @@ public class JavaBean {
 	public void connect(String bd, String ip) throws ClassNotFoundException, SQLException, Exception {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306/" + bd, "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306/" + bd, "root", "Berberita@10");
 		} catch (ClassNotFoundException cnfe) {
 			error = "ClassNotFoundException: Nu s-a gasit driverul bazei de date.";
 			throw new ClassNotFoundException(error);
@@ -72,7 +77,7 @@ public class JavaBean {
 			throw new SQLException(error);
 		}
 	} // disconnect()
-	
+
 	public ResultSet findUser(String user, String pass) throws SQLException, Exception{
 		ResultSet rs = null;
 		try {
@@ -88,7 +93,8 @@ public class JavaBean {
 		}
 		return rs;
 	}
-	
+
+
 	public ResultSet vedeAdvocates() throws SQLException, Exception {
 		ResultSet rs = null;
 		try {
@@ -118,6 +124,7 @@ public class JavaBean {
 			throw new Exception(error);
 		}
 		return rs;
+
 	}
 	public ResultSet vedeFolder() throws SQLException, Exception {
 		ResultSet rs = null;
@@ -151,11 +158,12 @@ public class JavaBean {
 		}
 		return rs;
 	}
-	
+
 	public void addUser(String user, String pass)
 			throws SQLException, Exception {
 		if (con != null) {
 			try {
+
 				// create a prepared SQL statement
 				Statement stmt;
 				stmt = con.createStatement();
@@ -206,7 +214,7 @@ public class JavaBean {
 			throw new Exception(error);
 		}
 	}
-		
+
 	public void stergeDateTabela(String[] primaryKeys, String tabela, String dupaID) throws SQLException, Exception {
 			if (con != null) {
 				try {
@@ -214,8 +222,8 @@ public class JavaBean {
 					long aux;
 					PreparedStatement delete;
 					delete = con.prepareStatement("DELETE FROM " + tabela + " WHERE " + dupaID + "=?;");
-					for (int i = 0; i < primaryKeys.length; i++) {
-						aux = java.lang.Long.parseLong(primaryKeys[i]);
+					for (String primaryKey : primaryKeys) {
+						aux = java.lang.Long.parseLong(primaryKey);
 						delete.setLong(1, aux);
 						delete.execute();
 					}
@@ -229,9 +237,9 @@ public class JavaBean {
 			} else {
 				error = "Exceptie: Conexiunea cu baza de date a fost pierduta.";
 				throw new Exception(error);
-			}			
+			}
 	}
-	
+
 	public void modificaTabela(String tabela, String IDTabela, int ID, String[] campuri, String[] valori) throws SQLException, Exception {
 		String update = "update " + tabela + " set ";
 		String temp = "";
@@ -274,7 +282,7 @@ public class JavaBean {
 		}
 		return rs;
 	}
-	
+
 	public String findUserNameById(int userId) throws SQLException, Exception {
 	    String userName = null;
 	    ResultSet rs = null;
@@ -299,5 +307,5 @@ public class JavaBean {
 	    }
 	    return userName;
 	}
-	
+
 }

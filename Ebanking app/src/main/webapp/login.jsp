@@ -4,6 +4,7 @@
 <html>
  <head>
  
+ 
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
  
  <style>
@@ -55,7 +56,9 @@
  <jsp:useBean id="jb" scope="session" class="db.JavaBean" />
  <jsp:setProperty name="jb" property="*" />
  
+ 
  <body>
+ 
  
  <%
  
@@ -63,13 +66,18 @@
 	Connection con;
  	
 	Class.forName("com.mysql.cj.jdbc.Driver");
-	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");			
+	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");			
  
  	String user = request.getParameter("username");
  	String pass = request.getParameter("password");
+ 	
+ 	session.setAttribute("username", user);
+    session.setAttribute("password", pass);
  	String queryString = ("select iduser from `ebanking`.`user` where Email='" + user + "' and Parola='" + pass + "';");
 	Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
 	ResultSet rs = stmt.executeQuery(queryString);
+	
+	session.setAttribute("email", user);
 	
 	if(rs.next()){
 		String username = request.getParameter("username");
