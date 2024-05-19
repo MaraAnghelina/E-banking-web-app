@@ -14,7 +14,7 @@ public class JavaBean {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spital?user=root&password=ValentinPupezescu2021;");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "");			
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");			
 
 			// daca sunt probleme la conectare se poate incerca conexiunea in forma urmatoare:
             // con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test3?useSSL=false?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "ValentinPupezescu2021;");
@@ -89,11 +89,11 @@ public class JavaBean {
 		return rs;
 	}
 	
-	public ResultSet vedeAdvocates() throws SQLException, Exception {
+	/*public ResultSet vedeAdvocates() throws SQLException, Exception {
 		ResultSet rs = null;
 		try {
 			String queryString = ("select * from `proiect`.`advocates`;");
-			Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
+			Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(queryString);
 		} catch (SQLException sqle) {
 			error = "SQLException: Interogarea nu a fost posibila.";
@@ -108,7 +108,7 @@ public class JavaBean {
 		ResultSet rs = null;
 		try {
 			String queryString = ("select * from `proiect`.`clients`;");
-			Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
+			Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(queryString);
 		} catch (SQLException sqle) {
 			error = "SQLException: Interogarea nu a fost posibila.";
@@ -124,7 +124,7 @@ public class JavaBean {
 		try {
 			String queryString = ("select * from `proiect`.`folder`;");
 			//String queryString = ("select a.Nume NumePacient, a.Prenume PrenumePacient, a.Adresa, b.Nume NumeMedic, b.Prenume PrenumeMedic, b.Sectie, c.idconsultatie, c.idmedic idmedic_consult, c.idpacient idpacient_consult, c.DataConsultatie, c.Diagnostic, c.Medicament from pacienti a, medici b, consultatie c where a.idpacient = c.idpacient and b.idmedic = c.idmedic;");
-			Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
+			Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(queryString);
 		} catch (SQLException sqle) {
 			error = "SQLException: Interogarea nu a fost posibila.";
@@ -140,7 +140,7 @@ public class JavaBean {
 		try {
 			//String queryString = ("select * from `proiect`.`folder`;");
 			String queryString = ("select a.Name ClientName, a.Surname ClientSurname, a.Criminal_record, b.Name AdvocateName, b.Surname AdvocateSurname, b.Type, c.idfolder, c.idadvocate idadvocate_folder, c.idclient idclient_folder, c.Name, c.Period, c.State from clients a, advocates b, folder c where a.idclient = c.idclient and b.idadvocate = c.idadvocate;");
-			Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
+			Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			rs = stmt.executeQuery(queryString);
 		} catch (SQLException sqle) {
 			error = "SQLException: Interogarea nu a fost posibila.";
@@ -150,7 +150,7 @@ public class JavaBean {
 			throw new Exception(error);
 		}
 		return rs;
-	}
+	}*/
 	
 	public void addUser(String user, String pass)
 			throws SQLException, Exception {
@@ -207,7 +207,7 @@ public class JavaBean {
 		}
 	}
 		
-	public void stergeDateTabela(String[] primaryKeys, String tabela, String dupaID) throws SQLException, Exception {
+	/*public void stergeDateTabela(String[] primaryKeys, String tabela, String dupaID) throws SQLException, Exception {
 			if (con != null) {
 				try {
 					// create a prepared SQL statement
@@ -230,9 +230,9 @@ public class JavaBean {
 				error = "Exceptie: Conexiunea cu baza de date a fost pierduta.";
 				throw new Exception(error);
 			}			
-	}
+	}*/
 	
-	public void modificaTabela(String tabela, String IDTabela, int ID, String[] campuri, String[] valori) throws SQLException, Exception {
+	/*public void modificaTabela(String tabela, String IDTabela, int ID, String[] campuri, String[] valori) throws SQLException, Exception {
 		String update = "update " + tabela + " set ";
 		String temp = "";
 		if (con != null) {
@@ -273,7 +273,7 @@ public class JavaBean {
 			throw new Exception(error);
 		}
 		return rs;
-	}
+	}*/
 	
 	public String findUserNameById(int userId) throws SQLException, Exception {
 	    String userName = null;
@@ -299,5 +299,5 @@ public class JavaBean {
 	    }
 	    return userName;
 	}
-	
+
 }

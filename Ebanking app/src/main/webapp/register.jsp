@@ -142,10 +142,6 @@
 		//}
     %>
     
-<<<<<<< HEAD
-
-=======
->>>>>>> f0e284c4e14f39ba6efe8336e708d77ff3e53088
     <script>
         function checkPasswordMatch() {
             var password = document.getElementById("password").value;
@@ -159,10 +155,6 @@
             }
         }
     </script>
-<<<<<<< HEAD
-
-=======
->>>>>>> f0e284c4e14f39ba6efe8336e708d77ff3e53088
     
 </body>
 </html>

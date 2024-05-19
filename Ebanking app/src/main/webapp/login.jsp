@@ -67,9 +67,15 @@
  
  	String user = request.getParameter("username");
  	String pass = request.getParameter("password");
+ 	
+ 	session.setAttribute("username", user);
+    session.setAttribute("password", pass);
+ 	
  	String queryString = ("select iduser from `ebanking`.`user` where Email='" + user + "' and Parola='" + pass + "';");
 	Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
 	ResultSet rs = stmt.executeQuery(queryString);
+	
+	session.setAttribute("email", user);
 	
 	if(rs.next()){
 		String username = request.getParameter("username");

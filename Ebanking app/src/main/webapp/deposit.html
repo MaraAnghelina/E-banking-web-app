@@ -61,15 +61,15 @@
 </head>
 <body>
 	<div class="container">
-                <h2 style="color: #eee; text-align: center;">Withdraw funds</h2>
+                <h2 style="color: #eee; text-align: center;">Deposit funds</h2>
                 <form method="post" action="cod.jsp">
-                    <label for="suma">Amount to Withdraw</label>
-                    <input type="text" id="sum" name="sum" placeholder="Enter amount" required>
+                    <label for="amount">Amount to deposit</label>
+                    <input type="text" id="amount" name="amount" placeholder="Enter amount" required>
 
-                    <label for="amount">Select the ATM you want to withdraw the funds</label>                    
-               
-                <div id="map"></div>
-                 </form>
+                    <label for="amount">Select the ATM you want to deposit the funds</label>                    
+                
+                	<div id="map"></div>
+                </form>
      </div>
     <!-- Map container -->
     
@@ -139,13 +139,12 @@
 			      .setPopup(popup) // sets a popup on this marker
 			      .addTo(map);
 			
+			
 		    
 		    function openGoing(){
-		    	sessionStorage.setItem('amount', '200');
 		    	window.location.href = "cod.jsp";
 		      }
     </script>
-
     
 </body>
 </html>
