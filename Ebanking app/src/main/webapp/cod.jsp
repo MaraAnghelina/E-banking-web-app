@@ -79,7 +79,7 @@
 		Connection con;
 	 	
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false&allowPublicKeyRetrieval=true", "root", "Trompisor*2002*");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false&allowPublicKeyRetrieval=true", "root", "Berberita@10");
 		jb.connect();
 		
 		String queryString = ("select iduser from user where Email='" + email + "';");

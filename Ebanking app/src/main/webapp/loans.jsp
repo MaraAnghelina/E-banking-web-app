@@ -1,6 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
+<%@ page language="java" import="java.lang.*,java.math.*,db.*,java.sql.*, java.io.*, java.util.*"%>
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,6 +56,7 @@
             color: white;
             cursor: pointer;
             transition: background-color 0.3s;
+            margin: 5px;
         }
         .button:hover {
             background-color: #356892;
@@ -82,6 +83,8 @@
             <input type="hidden" id="totalRepayment" name="totalRepayment">
             <input type="hidden" id="monthlyPayment" name="monthlyPayment">
         </form>
+        <div id="postResult"></div>
+        <button class="button" onclick="window.location.href='homepage.jsp'">Home</button>
     </div>
 
     <script>
@@ -109,7 +112,7 @@
             String loanTermStr = request.getParameter("loanTerm");
             String totalRepaymentStr = request.getParameter("totalRepayment");
             String monthlyPaymentStr = request.getParameter("monthlyPayment");
-
+            jb.connect();
             try {
                 if (loanAmountStr != null && loanTermStr != null && totalRepaymentStr != null && monthlyPaymentStr != null) {
                     double loanAmount = Double.parseDouble(loanAmountStr);
@@ -118,55 +121,82 @@
                     double monthlyPayment = Double.parseDouble(monthlyPaymentStr);
 
                     // Database connection parameters
-                    
-                    String username =(String) session.getAttribute("username"); // Replace with actual username
-                    String password = (String)session.getAttribute("password"); // Replace with actual password
+                    String username = (String) session.getAttribute("username"); // Replace with actual username
+                    String password = (String) session.getAttribute("password"); // Replace with actual password
 
                     Connection conn = null;
-                    PreparedStatement pstmt = null;
+                    Statement stmt = null;
                     ResultSet rs = null;
- 					
 
                     try {
                         // Load JDBC driver
                         Class.forName("com.mysql.cj.jdbc.Driver");
                         // Establish connection
-                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");	
+                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");
 
                         // Find user logic, replace with actual method to get user ID
-                       
-						
-						rs = jb.findUser(username, password);
+                        rs = jb.findUser(username, password);
                         if (rs.next()) {
                             int iduser = rs.getInt("iduser");
 
-                            // Insert loan details
-                            String sql = "INSERT INTO imprumuturi (Suma, Perioada, SumaFinala, PlataLunara, iduser) VALUES (?, ?, ?, ?, ?)";
-                            pstmt = conn.prepareStatement(sql);
-                            pstmt.setDouble(1, loanAmount);
-                            pstmt.setInt(2, loanTerm);
-                            pstmt.setDouble(3, totalRepayment);
-                            pstmt.setDouble(4, monthlyPayment);
-                            pstmt.setInt(5, iduser);
-                            pstmt.executeUpdate();
+                            // Construct SQL statement
+                            String sql = "INSERT INTO imprumuturi (Suma, Perioada, SumaFinala, PlataLunara, iduser) VALUES (" +
+                                         loanAmount + ", " +
+                                         loanTerm + ", " +
+                                         totalRepayment + ", " +
+                                         monthlyPayment + ", " +
+                                         iduser + ")";
 
-                            out.println("<div class='result'>Loan saved successfully!</div>");
+                            stmt = conn.createStatement();
+                            stmt.executeUpdate(sql);
+							
+                            if(loanAmountStr!= null){
+                    			double sum = Double.parseDouble(loanAmountStr);
+                    			String date = new Date().toString().substring(0, 10);
+
+                    			String currency = "";
+                    	    	String queryStringg = ("select Valuta from conturi where iduser='" + iduser + "';");
+                    	    	rs = stmt.executeQuery(queryStringg);
+                    	    	if(rs.next())
+                    	    		currency = rs.getString("Valuta");
+                    			
+                    			stmt = conn.createStatement();
+                    			stmt.executeUpdate("insert into tranzactii(TipTranzactie, Suma, Data, Valuta, iduser) values('" + "loan" + "' , '" + sum + "', '" + date + "', '" + currency + "', '" + iduser +"' );");
+                    			stmt = conn.createStatement();
+                    			
+                    			
+                    			double suma = 0;
+                    	    	String queryString = ("select Suma from conturi where iduser='" + iduser + "';");
+                    	    	stmt = conn.createStatement();
+                    	    	rs = stmt.executeQuery(queryString);
+                    	    	if(rs.next())
+                    	    		suma = rs.getDouble("Suma");
+                    	    	suma = suma + sum;
+                    			
+                    			stmt.executeUpdate("update conturi set Suma = '" + suma + "' where iduser='" + iduser + "';");
+                    		}
+                            
+                            
+                            out.println("<script>document.getElementById('postResult').innerHTML = 'Loan saved successfully!';</script>");
                         } else {
-                            out.println("<div class='result'>User not found.</div>");
+                            out.println("<script>document.getElementById('postResult').innerHTML = 'User not found.';</script>");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        out.println("<div class='result'>Error saving loan: " + e.getMessage() + "</div>");
+                        out.println("<script>document.getElementById('postResult').innerHTML = 'Error saving loan: " + e.getMessage() + "';</script>");
                     } finally {
                         if (rs != null) try { rs.close(); } catch (SQLException e) {}
-                        if (pstmt != null) try { pstmt.close(); } catch (SQLException e) {}
+                        if (stmt != null) try { stmt.close(); } catch (SQLException e) {}
                         if (conn != null) try { conn.close(); } catch (SQLException e) {}
                     }
                 }
             } catch (NumberFormatException e) {
-                out.println("<div class='result'>Error: Invalid input format.</div>");
+                out.println("<script>document.getElementById('postResult').innerHTML = 'Error: Invalid input format.';</script>");
             }
+            jb.disconnect();
         }
     %>
+    
+    
 </body>
 </html>

@@ -74,7 +74,7 @@
 		Connection con;
 	 	
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false&allowPublicKeyRetrieval=true", "root", "Trompisor*2002*");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false&allowPublicKeyRetrieval=true", "root", "Berberita@10");
 		
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
@@ -83,6 +83,8 @@
 		String cont = request.getParameter("cont");
 		String pass = request.getParameter("password");
 		String confirmPass = request.getParameter("confirm-password");
+		
+		
 		
 		/*if(confirmPass != pass){
 			out.println("<script type=\"text/javascript\">");
