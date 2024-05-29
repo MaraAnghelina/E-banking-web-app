@@ -93,7 +93,7 @@
 	    	Connection con;
 	     	
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");
+	    	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");
 	    	
 	    	String queryString = ("select iduser from user where Email='" + email + "';");
 	    	Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);

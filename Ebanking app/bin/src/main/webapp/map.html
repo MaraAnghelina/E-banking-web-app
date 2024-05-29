@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src='https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js'></script>
+    
+    <style>
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2b2b2b; /* Dark background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            /*justify-content: center;
+            align-items: center;*/
+            height: 100vh;
+        }
+        .container {
+            background-color: #353535; /* Darker container background color */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Lighter box shadow */
+            width: 100%;
+            height: 200px;
+        }
+        input[type="number"] {
+            width: 50%;
+            padding: 10px;
+            margin: 8px 25%;
+            display: inline-block;
+            border: 1px solid #444; /* Darker border color */
+            border-radius: 4px;
+            box-sizing: border-box;
+            color: #eee; /* Light font color */
+            background-color: #444; /* Darker background color for inputs */
+            text-align: center; /* Align input fields in center */
+        }
+        label {
+            color: #eee; /* Light font color for labels */
+            text-align: center; /* Align labels in center */
+            display: block;
+            margin-bottom: 5px; /* Add margin below each label */
+        }
+        #map {
+        	margin: 80px 0;
+            height: 400px; /* Adjust the height as needed */
+            width: 100%; /* Full width */
+        }
+    </style>
+</head>
+<body>
+	<div class="container">
+                <h2 style="color: #eee; text-align: center;">Withdraw funds</h2>
+                <form method="post">
+                    <label for="amount">Amount to Withdraw</label>
+                    <input type="number" id="amount" name="amount" placeholder="Enter amount" required>
+
+                    <label for="amount">Select the ATM you want to withdraw the funds</label>                    
+                </form>
+                
+                <div id="map"></div>
+     </div>
+    <!-- Map container -->
+    
+
+    <script>
+        // Initialize and display the map
+            // Specify the center coordinates of the map
+            const key='oFj0uisoNxQPnbXnI1Kp';
+			const map = new maplibregl.Map({
+			    container: 'map', // container id
+			    style: `https://api.maptiler.com/maps/streets/style.json?key=${key}`, // style URL
+			    center: [26.100,44.43], // starting position [lng, lat]
+			    zoom: 12 // starting zoom
+			});
+			
+			map.doubleClickZoom.disable();
+
+
+            // Define some places with their coordinates
+            /*var places = [
+                { position: { lat: 40.7128, lng: -74.0060 }, name: 'New York City' },
+                { position: { lat: 34.0522, lng: -118.2437 }, name: 'Los Angeles' },
+                { position: { lat: 51.5074, lng: -0.1278 }, name: 'London' }
+            ];
+
+            // Add markers for each place
+            places.forEach(function(place) {
+                var marker = new google.maps.Marker({
+                    position: place.position,
+                    map: map,
+                    title: place.name
+                });
+            });*/
+        
+    </script>
+
+    <!-- Include the Google Maps API script with your API key -->
+    
+</body>
+</html>

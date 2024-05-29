@@ -10,7 +10,7 @@
     <title>E-Banking Homepage</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, sans-serif; 
             background-color: #2b2b2b;
             margin: 0;
             padding: 0;
@@ -178,6 +178,7 @@
     		int id = 0;
 	    	
 	    	String error;
+	    	
 	    	Connection con;
 	     	
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
@@ -186,9 +187,9 @@
 	    	String queryString = ("select iduser from user where Email='" + email + "';");
 	    	Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
 	    	ResultSet rs = stmt.executeQuery(queryString);
-	    	if(rs.next())
+	    	if(rs.next()) 
 	    		id = rs.getInt("iduser");
-	    	
+	    	 
 	    	double sum = 0;
 	    	queryString = ("select Suma from conturi where iduser='" + id + "';");
 	    	stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);

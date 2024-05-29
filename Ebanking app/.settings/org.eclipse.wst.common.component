@@ -1,13 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-        
-    <wb-module deploy-name="Ebanking app">
-        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-                
-        <property name="context-root" value="Ebanking_app"/>
-                
-        <property name="java-output-path" value="/Ebanking app/build/classes"/>
             
-    </wb-module>
     
+    <wb-module deploy-name="Ebanking app">
+                
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <dependent-module archiveName="mysql-connector-j-8.2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Ade/Desktop/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="c3p0-0.9.5.2.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Ade/Desktop/TPI/quartz-2.3.0-SNAPSHOT/lib/c3p0-0.9.5.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="quartz-jobs-2.3.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Ade/Desktop/TPI/quartz-2.3.0-SNAPSHOT/lib/quartz-jobs-2.3.0-SNAPSHOT.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="log4j-1.2.16.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Ade/Desktop/TPI/quartz-2.3.0-SNAPSHOT/lib/log4j-1.2.16.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="quartz-2.3.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Ade/Desktop/TPI/quartz-2.3.0-SNAPSHOT/lib/quartz-2.3.0-SNAPSHOT.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="slf4j-api-1.7.7.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Ade/Desktop/TPI/quartz-2.3.0-SNAPSHOT/lib/slf4j-api-1.7.7.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="slf4j-log4j12-1.7.7.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/C:/Users/Ade/Desktop/TPI/quartz-2.3.0-SNAPSHOT/lib/slf4j-log4j12-1.7.7.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+                        
+        
+        <property name="context-root" value="Ebanking_app"/>
+                        
+        
+        <property name="java-output-path" value="/Ebanking app/build/classes"/>
+                    
+    
+    </wb-module>
+        
+
 </project-modules>
