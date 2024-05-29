@@ -16,7 +16,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-        }
+        }  
         .container {
             background-color: #353535; /* Darker container background color */
             padding: 20px;

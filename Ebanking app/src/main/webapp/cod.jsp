@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page language="java" import="java.lang.*,java.math.*,db.*,java.sql.*, java.io.*, java.util.*"%>
+<%@ page language="java" import="java.lang.*, java.math.*,db.*,java.sql.*, java.io.*, java.util.*"%>
 <%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 
 <html>
 <head>
    
-</head>
+</head> 
 
 <jsp:useBean id="jb" scope="session" class="db.JavaBean" />
 <jsp:setProperty name="jb" property="*" />
 
 <body>
-	
+	  
 	<%
 		String email =(String) session.getAttribute("email");
 		int id = 0;
@@ -22,7 +22,7 @@
 		Connection con;
 	 	
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false&allowPublicKeyRetrieval=true", "root", "Trompisor*2002*");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false&allowPublicKeyRetrieval=true", "root", "Berberita@10");
 		jb.connect();
 		
 		String queryString = ("select iduser from user where Email='" + email + "';");

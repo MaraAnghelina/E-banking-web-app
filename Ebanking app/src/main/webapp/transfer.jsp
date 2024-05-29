@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page language="java" import="java.lang.*,java.math.*,db.*,java.sql.*, java.io.*, java.util.*"%>
+<%@ page import="java.lang.*,java.math.*,db.*,java.sql.*,java.io.*,java.util.*"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #2b2b2b; /* Dark background color */
+            background-color: #2b2b2b;
             margin: 0;
             padding: 0;
             display: flex;
@@ -60,11 +60,11 @@
             padding: 10px;
             margin: 8px 10px;
             display: inline-block;
-            border: 1px solid #444; /* Darker border color */
+            border: 1px solid #444;
             border-radius: 4px;
             box-sizing: border-box;
-            color: #eee; /* Light font color */
-            background-color: #444; /* Darker background color for inputs */
+            color: #eee;
+            background-color: #444;
         }
         input[type="submit"] {
             background-color: #483D8B;
@@ -77,7 +77,7 @@
             background-color: #4682B4;
         }
         label {
-            color: #eee; /* Light font color for labels */
+            color: #eee;
         }
         .balance-tooltip {
             display: none;
@@ -93,38 +93,38 @@
             z-index: 1;
         }
         alert.custom-alert {
-		  --backdrop-opacity: 0.7;
-		}
-		
-		.custom-alert .alert-button-group {
-		  padding: 8px;
-		}
-		
-		button.alert-button.alert-button-confirm {
-		  background-color: var(--ion-color-success);
-		  color: var(--ion-color-success-contrast);
-		}
-		
-		.md button.alert-button.alert-button-confirm {
-		  border-radius: 4px;
-		}
-		
-		.custom-alert button.alert-button {
-		  border: 0.55px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.2);
-		}
-		
-		button.alert-button.alert-button-cancel {
-		  border-right: 0;
-		  border-bottom-left-radius: 13px;
-		  border-top-left-radius: 13px;
-		}
-		
-		button.alert-button.alert-button-confirm {
-		  border-bottom-right-radius: 13px;
-		  border-top-right-radius: 13px;
-		}
-		
-		.transactions {
+            --backdrop-opacity: 0.7;
+        }
+
+        .custom-alert .alert-button-group {
+            padding: 8px;
+        }
+
+        button.alert-button.alert-button-confirm {
+            background-color: var(--ion-color-success);
+            color: var(--ion-color-success-contrast);
+        }
+
+        .md button.alert-button.alert-button-confirm {
+            border-radius: 4px;
+        }
+
+        .custom-alert button.alert-button {
+            border: 0.55px solid rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.2);
+        }
+
+        button.alert-button.alert-button-cancel {
+            border-right: 0;
+            border-bottom-left-radius: 13px;
+            border-top-left-radius: 13px;
+        }
+
+        button.alert-button.alert-button-confirm {
+            border-bottom-right-radius: 13px;
+            border-top-right-radius: 13px;
+        }
+
+        .transactions {
             background-color: #444;
             padding: 10px;
             border-radius: 5px;
@@ -133,7 +133,7 @@
         }
         .balance {
             font-size: 20px;
-            color: #eee; 
+            color: #eee;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -142,8 +142,6 @@
 
 <jsp:useBean id="jb" scope="session" class="db.JavaBean" />
 <jsp:setProperty name="jb" property="*" />
-
-<% double amount = 0; %>
 
 <body>
     <div class="container">
@@ -159,92 +157,70 @@
             </div>
             <div class="form-group">
                 <label for="amount">Amount</label>
-                <input type="text" id="amount" name="amount" function="updateBalance()" required>
-                <%
-	                if(request.getParameter("amount") != null){
-	    				amount = Double.parseDouble(request.getParameter("amount"));
-	    				
-	                }
-	                out.print(amount);
-                %>
+                <input type="text" id="amount" name="amount" oninput="updateBalanceDisplay()" required>
             </div>
             <div class="form-group">
-            	<button value="Transfer">Transfer</button>
-                
+                <button type="submit">Transfer</button>
                 <alert trigger="present-alert" class="custom-alert" header="Are you sure?" [buttons]="alertButtons"></alert>
             </div>
         </form>
-        
+
         <div class="transactions">
             <h4>Your account balance: </h4>
-                <% 
-	                String email =(String) session.getAttribute("email");
-	        		int id = 0;
-	    	    	
-	    	    	String error;
-	    	    	Connection con;
-	    	     	
-	    	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	    	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");
-	    	    	
-	    	    	String queryString = ("select iduser from user where Email='" + email + "';");
-	    	    	Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
-	    	    	ResultSet rs = stmt.executeQuery(queryString);
-	    	    	if(rs.next())
-	    	    		id = rs.getInt("iduser");
-	    	    	
-	    	    	double sum = 0;
-	    	    	queryString = ("select Suma from conturi where iduser='" + id + "';");
-	    	    	stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
-	    	    	rs = stmt.executeQuery(queryString);
-	    	    	if(rs.next())
-	    	    		sum = rs.getDouble("Suma");
-	    	    	sum = sum - amount;
-	    	    	
-	    	    	String currency = "";
-	    	    	queryString = ("select Valuta from conturi where iduser='" + id + "';");
-	    	    	stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
-	    	    	rs = stmt.executeQuery(queryString);
-	    	    	if(rs.next())
-	    	    		currency = rs.getString("Valuta");
-	                    
-                %>
-                   <div class="balance">
-			             <%= sum %>  <%= currency %>
-			        </div>
-                <% 
-                    
-                    rs.close();
-                    stmt.close();
-                    con.close();
-                %>
-                
-           		<form name="aform" action="#"> 
-        <input type="text" name="name" onkeyup="nameModify(this.form.elements['email'], this);" >
-        <input type="text" name="email" >
-		</form>
-           		
+            <%
+                String email = (String) session.getAttribute("email");
+                int id = 0;
+
+                Connection con;
+
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");
+
+                String queryString = "select iduser from user where Email='" + email + "';";
+                Statement stmt = con.createStatement();
+                ResultSet rs = stmt.executeQuery(queryString);
+                if (rs.next()) {
+                    id = rs.getInt("iduser");
+                }
+
+                double sum = 0;
+                queryString = "select Suma from conturi where iduser='" + id + "';";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(queryString);
+                if (rs.next()) {
+                    sum = rs.getDouble("Suma");
+                }
+
+                String currency = "";
+                queryString = "select Valuta from conturi where iduser='" + id + "';";
+                stmt = con.createStatement();
+                rs = stmt.executeQuery(queryString);
+                if (rs.next()) {
+                    currency = rs.getString("Valuta");
+                }
+
+                rs.close();
+                stmt.close();
+                con.close();
+            %>
+            <div class="balance" id="currentBalance"><%= sum %> <%= currency %></div>
         </div>
-        
     </div>
 
     <script>
-    	const int balance = 0;
-	    function updateBalance() {
-	        const xhr = new XMLHttpRequest();
-	        const amount = document.getElementById('amount').value;
-	        
-	        xhr.open("POST", "updateBalance.jsp", true);
-	        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	        xhr.send("amount=" + amount);
-	       	alert("aiciiiiiiiiiiiiii");
-	    }
-	    function nameModify(emailElement, nameElement) {
+        const currentBalance = parseFloat("<%= sum %>");
+        const currency = "<%= currency %>";
 
-	        emailElement.value = nameElement.value + '@stackoverflow.com';
-	}
-	   
-	    
+        function updateBalanceDisplay() {
+            const amountElement = document.getElementById('amount');
+            const amount = parseFloat(amountElement.value) || 0;
+            const updatedBalance = currentBalance - amount;
+            const balanceDisplay = document.getElementById('currentBalance');
+            balanceDisplay.textContent = updatedBalance.toFixed(2) + ' ' + currency;
+        }
+
+        // Initialize balance display with the current balance
+        document.getElementById('currentBalance').textContent = currentBalance.toFixed(2) + ' ' + currency;
     </script>
 </body>
 </html>

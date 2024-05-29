@@ -12,9 +12,9 @@
             font-family: Arial, sans-serif;
             background-color: #2b2b2b;
             color: #eee;
-            margin: 0;
+            margin: 0; 
             padding: 0;
-        }
+        } 
          
         .container {
             background-color: #353535; /* Lighter container background color */

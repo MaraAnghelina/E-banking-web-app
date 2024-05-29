@@ -16,8 +16,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-        }
-        
+        }  
         .container {
             background-color: #353535; /* Darker container background color */
             padding: 20px;
@@ -86,8 +85,7 @@
 		String confirmPass = request.getParameter("confirm-password");
 		
 		
-	    
-        
+		
 		/*if(confirmPass != pass){
 			out.println("<script type=\"text/javascript\">");
 	 	    out.println("alert('The passwords do not match');");
@@ -146,8 +144,6 @@
 		//}
     %>
     
-
-
     <script>
         function checkPasswordMatch() {
             var password = document.getElementById("password").value;
@@ -161,7 +157,6 @@
             }
         }
     </script>
-
     
 </body>
 </html>

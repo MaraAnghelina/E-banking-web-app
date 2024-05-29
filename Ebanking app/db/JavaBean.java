@@ -1,20 +1,22 @@
 package db;
 
 import java.sql.*;
+ 
+//import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
 
-public class JavaBean {
+public class JavaBean  {
 
 	String error;
 	Connection con;
-
+ 
 	public JavaBean() {
 	}
 
 	public void connect() throws ClassNotFoundException, SQLException, Exception {
-		try {
+		try {  
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// con = DriverManager.getConnection("jdbc:mysql://localhost:3306/spital?user=root&password=ValentinPupezescu2021;");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");			
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");			
 
 			// daca sunt probleme la conectare se poate incerca conexiunea in forma urmatoare:
             // con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test3?useSSL=false?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "ValentinPupezescu2021;");
@@ -33,7 +35,7 @@ public class JavaBean {
 	public void connect(String bd) throws ClassNotFoundException, SQLException, Exception {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + bd, "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + bd, "root", "Berberita@10");
 		} catch (ClassNotFoundException cnfe) {
 			error = "ClassNotFoundException: Nu s-a gasit driverul bazei de date.";
 			throw new ClassNotFoundException(error);
@@ -49,7 +51,7 @@ public class JavaBean {
 	public void connect(String bd, String ip) throws ClassNotFoundException, SQLException, Exception {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306/" + bd, "root", "");
+			con = DriverManager.getConnection("jdbc:mysql://" + ip + ":3306/" + bd, "root", "Berberita@10");
 		} catch (ClassNotFoundException cnfe) {
 			error = "ClassNotFoundException: Nu s-a gasit driverul bazei de date.";
 			throw new ClassNotFoundException(error);

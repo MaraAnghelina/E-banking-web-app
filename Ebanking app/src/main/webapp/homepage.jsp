@@ -2,13 +2,13 @@
 <%@ page language="java" import="java.lang.*,java.math.*,db.*,java.sql.*, java.io.*, java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+<head> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Banking Homepage</title>
-    <style>
+    <style> 
         body {
             font-family: Arial, sans-serif; 
             background-color: #2b2b2b;
@@ -54,7 +54,7 @@
             transition: background-color 0.3s;
             min-width: 120px;
         }
-
+ 
         .button-container input[type="submit"]:hover {
             background-color: #4682B4; 
         }
@@ -182,14 +182,14 @@
 	    	Connection con;
 	     	
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");
+	    	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");
 	    	
 	    	String queryString = ("select iduser from user where Email='" + email + "';");
 	    	Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
 	    	ResultSet rs = stmt.executeQuery(queryString);
 	    	if(rs.next()) 
 	    		id = rs.getInt("iduser");
-	    	 
+	    	  
 	    	double sum = 0;
 	    	queryString = ("select Suma from conturi where iduser='" + id + "';");
 	    	stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);

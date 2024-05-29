@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*, java.io.*" %>
+<%@ page language="java" import="java.lang.*,java.math.*,db.*,java.sql.*, java.io.*, java.util.*"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +16,7 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; 
             height: 100vh;
         }
 
@@ -75,7 +76,7 @@
 
             if (currentPassword != null && newPassword != null && confirmNewPassword != null) {
                 if (newPassword.equals(confirmNewPassword)) {
-                    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10")) {
+                    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*")) {
                         PreparedStatement ps = con.prepareStatement("SELECT Parola FROM user WHERE Email = ?");
                         ps.setString(1, email);
                         ResultSet rs = ps.executeQuery();
