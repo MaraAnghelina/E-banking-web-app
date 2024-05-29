@@ -181,7 +181,7 @@
 	    	Connection con;
 	     	
 	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");
+	    	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");
 	    	
 	    	String queryString = ("select iduser from user where Email='" + email + "';");
 	    	Statement stmt = con.createStatement(/*ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY*/);
@@ -215,7 +215,7 @@
             <input type="submit" value="View Transactions" onclick="redirectToTransactionsPage()">
             <input type="submit" value="Withdraw Funds" onclick="redirectToWithdrawPage()">
             <input type="submit" value="Deposit Funds" onclick="redirectToDepositPage()">
-            <input type="submit" value="Transfer Money">
+            <input type="submit" value="Transfer Money" onclick="redirectToTransferPage()">
              <input type="submit" value="Loans" onclick="redirectToLoansPage()">
         </div>
 
@@ -293,6 +293,10 @@
         
         function redirectToTransactionsPage() {
             window.location.href = "transactions.jsp";
+        }
+        
+        function redirectToTransferPage() {
+            window.location.href = "transfer.jsp";
         }
         
         function LogOut() {

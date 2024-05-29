@@ -132,7 +132,7 @@
                         // Load JDBC driver
                         Class.forName("com.mysql.cj.jdbc.Driver");
                         // Establish connection
-                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");
+                        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");
 
                         // Find user logic, replace with actual method to get user ID
                         rs = jb.findUser(username, password);

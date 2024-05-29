@@ -63,7 +63,7 @@
 	Connection con;
  	
 	Class.forName("com.mysql.cj.jdbc.Driver");
-	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Berberita@10");			
+	con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ebanking?useSSL=false", "root", "Trompisor*2002*");			
  
 	
  	String user = request.getParameter("username");
